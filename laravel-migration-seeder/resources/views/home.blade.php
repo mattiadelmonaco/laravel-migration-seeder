@@ -4,17 +4,19 @@
 
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Treni Laravel</title>
-    @vite(['resources/sass/app.scss', "resources/js/app.js"])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     {{-- GOOGLE FONTS --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -24,34 +26,49 @@
 
     <main>
         <div class="container">
-            <ul class="list-unstyled">
-                @foreach ($trains as $train)
-                    <li>
-                        <span>{{$train["departure_date"]}}</span>
-                        <span>{{$train["agency"]}}</span>
-                        <span>{{$train["train_code"]}}</span>
-                        <span>{{$train["departure_station"]}}</span>
-                        <span>{{$train["departure_time"]}}</span>
-                        <span>{{$train["arrival_station"]}}</span>
-                        <span>{{$train["arrival_time"]}}</span>
-                        <span>{{$train["total_carriages"]}}</span>
-                        
-                        @if ($train["on_time"] === 1)
-                        <span>IN ORARIO</span>
-                        @else 
-                        <span>IN RITARDO</span>
-                        @endif 
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Data di partenza</th>
+                        <th scope="col">Treno</th>
+                        <th scope="col">Partenza</th>
+                        <th scope="col">Orario di partenza</th>
+                        <th scope="col">Arrivo</th>
+                        <th scope="col">Orario di arrivo</th>
+                        <th scope="col">Numero carrozze</th>
+                        <th scope="col">Ritardo</th>
+                        <th scope="col">Corsa cancellata</th>
+                    </tr>
+                </thead>
 
-                        @if ($train["if_cancelled"] === 0)
-                        <span>NON CANCELLATO</span>
-                        @else
-                        <span>CANCELLATO</span>
-                        @endif
+                <tbody>
+                    @foreach ($trains as $train)
+                        <tr>
+                            <td>{{ $train['departure_date'] }}</td>
+                            <td>{{ $train['agency'] }} - {{ $train['train_code'] }}</td>
+                            <td>{{ $train['departure_station'] }}</td>
+                            <td>{{ $train['departure_time'] }}</td>
+                            <td>{{ $train['arrival_station'] }}</td>
+                            <td>{{ $train['arrival_time'] }}</td>
+                            <td>{{ $train['total_carriages'] }}</td>
+
+                            @if ($train['on_time'] === 1)
+                                <td>IN ORARIO</td>
+                            @else
+                                <td>IN RITARDO</td>
+                            @endif
+
+                            @if ($train['if_cancelled'] === 0)
+                                <td>NON CANCELLATO</td>
+                            @else
+                                <td>CANCELLATO</td>
+                            @endif
 
 
-                    </li>
-                @endforeach
-            </ul>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </main>
 
@@ -61,4 +78,5 @@
         </div>
     </footer>
 </body>
+
 </html>
