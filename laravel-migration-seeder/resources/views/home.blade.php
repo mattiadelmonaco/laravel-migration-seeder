@@ -1,3 +1,7 @@
+@php
+    // dd($trains);
+@endphp
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -8,6 +12,10 @@
 </head>
 <body>
     <h1>ciao</h1>
-    
+    <ul>
+        @foreach ($trains as $train)
+            <li>{{$train["agency"]}}</li>
+        @endforeach
+    </ul>
 </body>
 </html>
